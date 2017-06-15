@@ -1,37 +1,43 @@
-WebGL Heatmap Leaflet Plugin
+基于 WebGL 的 Leaflet 热力图插件
 ============================
 
-![MIT License](http://img.shields.io/badge/license-MIT-lightgrey.svg)
+![MIT 许可证](http://img.shields.io/badge/license-MIT-lightgrey.svg)
 &nbsp;
 ![Leaflet](http://img.shields.io/badge/leaflet-1.0.1-green.svg?style=flat)
 &nbsp;
-[![Build Status](https://travis-ci.org/ursudio/leaflet-webgl-heatmap.svg?branch=master)](https://travis-ci.org/ursudio/leaflet-webgl-heatmap)
+[![构建状态](https://travis-ci.org/ursudio/leaflet-webgl-heatmap.svg?branch=master)](https://travis-ci.org/ursudio/leaflet-webgl-heatmap)
 
-A Leaflet plugin for [@pyalot](https://github.com/pyalot)'s [webgl heatmap library](https://github.com/pyalot/webgl-heatmap).
+一个 Leaflet 插件，基于 [@pyalot](https://github.com/pyalot) 的 [webgl 热力图库](https://github.com/pyalot/webgl-heatmap).
 
-As [@pyalot](https://github.com/pyalot) explains in his post, [High Performance JS heatmaps](http://codeflow.org/entries/2013/feb/04/high-performance-js-heatmaps/), sometimes there is a need to be able to draw hundreds of thousands of data points to a map (and not have your browser crash due to lag).
+就像 [@pyalot](https://github.com/pyalot) 在他的文章中指出的， [高性能的 JS 热力图](http://codeflow.org/entries/2013/feb/04/high-performance-js-heatmaps/)，有时需要能够将数十万个数据点绘制到地图上（并且由于滞后而导致浏览器崩溃）。
 
-We used his library to create a WebGL alternative to Leaflet's existing heatmap plugins.
+我们使用他的 WebGL 热力图库替换 leaflet 现有的热力图插件。
 
-It uses the following existing options in the library:
+本插件使用了以下在他的库中存在的参数：
 
-* gradientTexture (use a PNG instead of default green to red)
-* alphaRange (show transparency)
+* gradientTexture （使用PNG，而不是默认的绿色到红色）
+* alphaRange （显示透明度）
 
-See the [example](http://ursudio.github.io/leaflet-webgl-heatmap/)
+详见 [在线示例](http://ursudio.github.io/leaflet-webgl-heatmap/)
 
-![Screenshot](http://i.imgur.com/VGXbWpx.png)
+[![Screenshot](http://i.imgur.com/VGXbWpx.png)](http://ursudio.github.io/leaflet-webgl-heatmap/)
 
-## Installation
+## 安装
 
-via npm:
+通过 npm:
 ```bash
 npm install leaflet-webgl-heatmap --save 
 ```
+## 依赖关系
 
-## Usage
+当前版本依赖最新的leaflet库，之前版本对应leaflet版本也不相同。
 
-### Set up your map
+  * leaflet 1.0.3版本（包括js、css文件）
+  * webgl-heatmap.js
+  
+## 用法
+
+### 创建你的地图
 
 ```javascript
 var base = L.tileLayer( tileURL );
@@ -42,7 +48,7 @@ var map = L.map('mapid', {
 });
 ```
 
-### Initialize Heatmap
+### 初始化热力图
 
 ```javascript
 var heatmap = new L.webGLHeatmap({
@@ -50,7 +56,7 @@ var heatmap = new L.webGLHeatmap({
 });
 ```
 
-OR in pixels (doesn't scale with zoom levels):
+**或**以像素为单位（不随地图尺度缩放）：
 
 ```javascript
 var heatmap = new L.webGLHeatmap({
@@ -59,34 +65,34 @@ var heatmap = new L.webGLHeatmap({
 });
 ```
 
-### Add Data
+### 添加数据
 
-You should have an array of arrays in format: `[[lat, lng]...]` or be explicit with the point intensities: `[[lat, lng, intensity]...]`
+数据格式为二维数组： `[[lat, lng]...]` ，或者明确每个点的强度： `[[lat, lng, intensity]...]`
 
 ```javascript
 var dataPoints = [[44.6674, -63.5703, 37], [44.6826, -63.7552, 34], [44.6325, -63.5852, 41], [44.6467, -63.4696, 67], [44.6804, -63.487, 64], [44.6622, -63.5364, 40], [44.603, - 63.743, 52]];
 ```
 
-With this you can add the whole dataset with `heatmap.setData(dataPoints)`.
+得到这样格式的数据后，你就可以使用 `heatmap.setData(dataPoints)`来添加数据集了。
 
-### Add heatmap to map
+### 将热力图添加到地图
 
 ```javascript
 map.addLayer( heatmap );
 ```
 
-## Options
+## 选项
 
-* size (in meters or pixels)
-* units (m or px)
-* opacity (for the canvas element)
-* gradientTexture (image url or image)
-* alphaRange (adjust transparency by changing to value between 0 and 1)
+* size （以 米 为单位或者以 像素 为单位的大小）
+* units （m 或者 px）
+* opacity （canvas元素的透明度）
+* gradientTexture （图片路径或者图片）
+* alphaRange （通过改变0到1之间的值来调整透明度）
 
-## Methods
+## 方法
 
-* multiply (alter the intensity values of all points by a given number)
+* multiply （将所有点的强度值乘以一个给定的数字）
 
-## License
+## 许可
 
-* MIT: see mit-license
+* MIT: 详见 mit-license
